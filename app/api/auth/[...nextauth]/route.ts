@@ -39,29 +39,7 @@ export const handler = NextAuth({
             },
             async authorize(credentials: Record<"email" | "username" | "password", string> | undefined): Promise<any | null>
             {
-
                 console.log(credentials)
-
-                const databaseUser = await prisma.user.findFirst({
-                    where: {
-                        email: credentials?.email
-                    }
-                })
-
-                if (databaseUser)
-                {
-                    return true
-                }
-
-                await prisma.user.create({
-                    data: {
-                        email: credentials?.email!,
-                        username: credentials?.username!,
-                        password: credentials?.password!,
-                    }
-                })
-
-                return true
             }
         })
     ],
@@ -70,6 +48,7 @@ export const handler = NextAuth({
         async session({ session })
         {
             console.log(session)
+            
             const dbUser = await prisma.user.findFirst({
                 where: {
                     email: session.user.email
@@ -84,25 +63,25 @@ export const handler = NextAuth({
 
             try
             {
-                console.log(user)
-                const databaseUser = await prisma.user.findFirst({
-                    where: {
-                        email: user.email!
-                    }
-                })
-                if (databaseUser)
-                {
-                    return true
-                }
+                // console.log(user)
+                // const databaseUser = await prisma.user.findFirst({
+                //     where: {
+                //         email: user.email!
+                //     }
+                // })
+                // if (databaseUser)
+                // {
+                //     return true
+                // }
 
-                await prisma.user.create({
-                    data: {
-                        email: user.email!,
-                        username: user.name!,
-                        password: user.image!,
+                // await prisma.user.create({
+                //     data: {
+                //         email: user.email!,
+                //         username: user.name!,
+                //         password: user.image!,
 
-                    }
-                })
+                //     }
+                // })
                 return true
             } catch (error)
             {
