@@ -1,30 +1,31 @@
 "use client";
 import React from "react";
 import { Button } from "../ui/button";
-import { BananaIcon, GithubIcon } from "lucide-react";
 import { signIn } from "next-auth/react";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
-const SocialMediaContiner = () => {
-  const googleSignIn = () => {
-    signIn("google");
-  };
+const SocialMediaContiner = () =>
+{
+
   return (
     <>
-      <div className=" space-y-4">
+      <div className="w-full flex  gap-x-2 ">
         <Button
-          onClick={googleSignIn}
-          variant={"secondary"}
-          className=" w-full"
+          size="lg"
+          className="w-full"
+          variant="outline"
+          onClick={() => signIn("google")}
         >
-          <BananaIcon />
-          Continue With Goolge
+          <FcGoogle className="h-8 w-8" />
         </Button>
         <Button
+          size="lg"
+          className="w-full"
+          variant="outline"
           onClick={() => signIn("github")}
-          variant={"secondary"}
-          className=" w-full"
         >
-          <GithubIcon /> Continue With Github
+          <FaGithub className="h-8 w-8" />
         </Button>
       </div>
     </>

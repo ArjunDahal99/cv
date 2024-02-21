@@ -1,15 +1,16 @@
 import CardContainer from "@/components/auth/card-container";
 import React from "react";
-import RegisterForm from "./components/register-form";
+import SignUpForm from "./components/singup-form";
 
-const page = () => {
+const page = () =>
+{
   return (
     <CardContainer
       showSocialMedia={true}
       title={"Register"}
-      content={<RegisterForm />}
+      content={<SignUpForm />}
       description={"Welcome"}
-      footerUrl={"/auth/login"}
+      footerUrl={"/api/auth/signin"}
       footertext={"Already have Account ?"}
     />
   );

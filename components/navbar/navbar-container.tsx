@@ -1,13 +1,21 @@
 import React from "react";
 import { ThemeModeToggle } from "./theme-toggle";
-
-const NavbarContainer = () => {
+import { auth } from "@/auth"
+import UserProfileBox from "./user-profile-box";
+import Link from "next/link";
+import Image from "next/image";
+import { LogoDark, LogoWhite } from "@/public/images";
+const NavbarContainer = async () =>
+{
+  const session = await auth()
   return (
-    <nav className=" w-full h-20 border-b-2 flex  items-center justify-between px-32 max-md:px-8 py-10 ">
-      <div className="">
-        <h1 className=" text-3xl font-extrabold">SenCV</h1>
-      </div>
-      <div className="">
+    <nav className=" fixed w-full h-20  flex  bg-background/60 items-center justify-between px-6 max-md:px-3 py-10 ">
+      <Link href={'/'}>
+        <Image src={LogoWhite} alt="Light Mode Image" className=" w-[150px]  object-cover dark:hidden" />
+        <Image src={LogoDark} alt="Light Mode Image" className=" w-[150px]   object-cover hidden dark:block" />
+      </Link>
+      <div className=" flex items-center gap-x-4">
+        <UserProfileBox data={session?.user} />
         <ThemeModeToggle />
       </div>
     </nav>

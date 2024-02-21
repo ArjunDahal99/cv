@@ -1,5 +1,6 @@
 import React from "react";
-import {
+import
+{
   Card,
   CardContent,
   CardDescription,
@@ -10,8 +11,11 @@ import {
 import Link from "next/link";
 import { Button } from "../ui/button";
 import SocialMediaContiner from "./social-media";
+import Image from "next/image";
+import { LogoDark, LogoWhite } from "@/public/images";
 
-interface CardContainerPropsType {
+interface CardContainerPropsType
+{
   title: string;
   description?: string;
   content: React.ReactNode;
@@ -27,9 +31,10 @@ const CardContainer = ({
   showSocialMedia,
   footerUrl,
   footertext,
-}: CardContainerPropsType) => {
+}: CardContainerPropsType) =>
+{
   return (
-    <Card className=" w-[500px]">
+    <Card className=" w-[500px] max-md:w-full max-md:mx-2">
       <CardHeader>
         <CardTitle className=" text-center">{title}</CardTitle>
         <CardDescription>{description}</CardDescription>

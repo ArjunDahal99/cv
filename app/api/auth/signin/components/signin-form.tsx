@@ -3,7 +3,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import {
+import
+{
   Form,
   FormControl,
   FormField,
@@ -12,41 +13,61 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { registerFormSchema } from "@/schema/zod-register";
+import { loginFormSchema } from "@/schema/zod-login";
 import { z } from "zod";
-import { registerUser } from "@/server-action/register-user";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SubmissionMessage from "@/components/auth/form-submit-message";
-// useRouter
-import { useRouter } from "next/navigation";
-
-const RegisterForm = () => {
+import { signIn } from "next-auth/react";
+import { useSearchParams, useRouter } from "next/navigation";
+const LoginForm = () =>
+{
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const onSubmit = async (values: z.infer<typeof registerFormSchema>) => {
-    try {
-      setIsLoading(true);
-      const { message, status } = await registerUser(values);
-      if (status) {
-        setSuccessMessage(message);
-        setErrorMessage("");
-      } else {
-        setErrorMessage(message);
-        setSuccessMessage("");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    setIsLoading(false);
-  };
+  const params = useSearchParams()
+  const search = params.get('error')
 
-  const form = useForm<z.infer<typeof registerFormSchema>>({
-    resolver: zodResolver(registerFormSchema),
+  useEffect(() =>
+  {
+    if (search)
+    {
+      setErrorMessage("Invalid Email or Password")
+    }
+
+  }, [search])
+
+
+  const onSubmit = async (values: z.infer<typeof loginFormSchema>) =>
+  {
+    alert(values)
+    try
+    {
+      setIsLoading(true)
+      await signIn("credentials", values)
+    } catch (error: any)
+    {
+      if (error)
+      {
+        console.log(error)
+        switch (error.type)
+        {
+          case "CredentialsSignin":
+            return { error: "Invalid credentials!" }
+          default:
+            return { error: "Something went wrong!" }
+        }
+      }
+
+    }
+    setIsLoading(false)
+  }
+
+
+  const form = useForm<z.infer<typeof loginFormSchema>>({
+    resolver: zodResolver(loginFormSchema),
     defaultValues: {
-      username: "",
       email: "",
       password: "",
     },
@@ -55,23 +76,6 @@ const RegisterForm = () => {
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input
-                    disabled={isLoading}
-                    placeholder="Username"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <FormField
             control={form.control}
             name="email"
@@ -109,7 +113,7 @@ const RegisterForm = () => {
             className=" w-full"
             type="submit"
           >
-            Register
+            Sign In
           </Button>
         </form>
         {successMessage && (
@@ -123,4 +127,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default LoginForm;

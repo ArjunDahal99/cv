@@ -15,41 +15,47 @@ type RegisterResponse = {
 };
 
 // Explicitly annotate the type of the registerUser function
-export const registerUser: (values: RegisterFormValues) => Promise<RegisterResponse> = async (values) => {
-  try {
+export const registerUser: (values: RegisterFormValues) => Promise<RegisterResponse> = async (values) =>
+{
+  try
+  {
     const { email, password, username } = values;
 
     // Ensure that the provided values match the schema
     const validationResult = registerFormSchema.safeParse(values);
 
-    if (!validationResult.success) {
+    if (!validationResult.success)
+    {
       throw new Error("Validation error");
     }
 
     // Check if the user already exists
-    const user = await prisma.user.findFirst({where:{
-     email
-    }})
-    if (user) {
+    const user = await prisma.user.findFirst({
+      where: {
+        email
+      }
+    })
+    if (user)
+    {
       return { message: "User Already Exist", status: false };
     }
 
     // Hash the password
     const hashPassword = await bcrypt.hash(password, 10);
-    console.log(hashPassword);
-
     // Create the user
     await prisma.user.create({
       data: {
         email,
         username,
-        password: hashPassword
+        password: hashPassword,
+        credentialProvider: "Credentail"
       }
     });
 
     // Return success message
     return { message: "User Registered Successfully", status: true };
-  } catch (error) {
+  } catch (error)
+  {
     console.log(error);
     return { message: "Error occurred while registering user", status: false };
   }

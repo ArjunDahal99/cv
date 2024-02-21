@@ -6,10 +6,10 @@ import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
 
-export function ThemeModeToggle() {
+export function ThemeModeToggle()
+{
   const { setTheme, theme } = useTheme();
 
-  console.log(theme);
   return (
     <Button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
