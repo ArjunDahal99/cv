@@ -1,19 +1,20 @@
+//@ts-nocheck
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
-interface CVTemplateState
+export interface CVTemplateType
 {
     subject: string;
     body: string;
     fileName: string;
-    filePath: string;
-    email: string[];
-    setField: (field: Partial<CVTemplateState>) => void;
+    fileUrl: string;
+    email?: string[];
+    setField: (field: Partial<CVTemplateType>) => void;
     addEmail: (newEmail: string) => void; // Function to add an email
     deleteEmail: (newEmail: string) => void; // Function to add an email
 }
 
-export const useCVTemplateStore = create<CVTemplateState>(
+export const useCVTemplateStore = create<CVTemplateType>(
     //@ts-ignore
     devtools(
         persist(
@@ -22,7 +23,7 @@ export const useCVTemplateStore = create<CVTemplateState>(
                 body: '',
                 email: [],
                 fileName: '',
-                filePath: '',
+                fileUrl: '',
                 setField: (field) => set(field),
                 addEmail: (newEmail) => set((state) => ({ email: [...state.email, newEmail] })),
                 deleteEmail: (email) => set((state) => ({ email: state.email.filter((e) => e != email) }))

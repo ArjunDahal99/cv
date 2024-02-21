@@ -2,26 +2,33 @@
 
 import { auth } from "@/auth"
 import prisma from "@/db/db.config"
+import { CVTemplateType } from "@/store/cv-template-store"
 
-export const createUserTemplate = async (data: any) =>
+export const createUserTemplate = async ({body , subject,fileName, fileUrl}: any) =>
 {
-    console.log(data)
+
     const session = await auth()
     if (!session)
     {
         return { message: "User Not uthorized", status: false }
     }
 
-
     const user = await prisma.user.findUnique({ where: { id: session.user.id } })
 
-    const template = await prisma.template.findMany({
-        where: {
-            userId: user?.id
-        }
-    })
+    if(!user) {
+        return { message: "User Not uthorized", status: false }
+    }
 
-    return { message: "Template Fetched", data: template }
+
+    const template = await prisma.template.create({data:{
+        userId:user.id,
+        body,
+        fileName,
+        fileUrl,
+        subject
+    }})
+
+    return { message: "Template Created", data: template, status:true }
 
 
 }

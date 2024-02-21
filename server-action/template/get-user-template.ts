@@ -2,25 +2,32 @@
 
 import { auth } from "@/auth"
 import prisma from "@/db/db.config"
+import { revalidatePath } from "next/cache"
 
-export const getUserTemplate = async () =>
+export const getUserTemplate = async ():Promise<any> =>
 {
-    const session = await auth()
-    if (!session)
-    {
-        return { message: "User Not uthorized", status: false }
+
+    try {
+        const session = await auth()
+        if (!session)
+        {
+            return { message: "User Not uthorized", status: false }
+        }
+    
+    
+        const user = await prisma.user.findUnique({ where: { id: session.user.id } })
+    
+        const template = await prisma.template.findMany({
+            where: {
+                userId: user?.id
+            }
+        })
+        revalidatePath('/')
+        return { message: "Template Fetched", data: template } 
+    } catch (error) {
+        console.log(error)
     }
 
-
-    const user = await prisma.user.findUnique({ where: { id: session.user.id } })
-
-    const template = await prisma.template.findMany({
-        where: {
-            userId: user?.id
-        }
-    })
-
-    return { message: "Template Fetched", data: template }
 
 
 }
