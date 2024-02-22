@@ -9,7 +9,8 @@ import { Label } from "@/components/ui/label";
 import { createUserTemplate } from "@/server-action/template/create-user-template";
 import { toast } from "sonner";
 
-const CvInput = () => {
+const CvInput = ({ templateId }: { templateId: string }) =>
+{
   const [isLoading, setIsLoading] = useState(false);
   const { subject, body, fileName, fileUrl, setField, email } =
     useCVTemplateStore();
@@ -17,12 +18,15 @@ const CvInput = () => {
   //chnaging the globalState
   const handleInputChange =
     (field: keyof typeof useCVTemplateStore.prototype) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setField({ [field]: e.target.value });
-    };
+      (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      {
+        setField({ [field]: e.target.value });
+      };
 
-  const saveTemplate = async (e: React.FormEvent<HTMLFormElement>) => {
-    try {
+  const saveTemplate = async (e: React.FormEvent<HTMLFormElement>) =>
+  {
+    try
+    {
       e.preventDefault();
       setIsLoading(true);
       const response = await createUserTemplate({
@@ -30,11 +34,15 @@ const CvInput = () => {
         subject,
         fileName,
         fileUrl,
+        templateId,
+        email
       });
-      if (response.status) {
-        toast.success("Template Created");
+      if (response.status)
+      {
+        toast.success(response.message);
       }
-    } catch (error) {
+    } catch (error)
+    {
       console.log(error);
     }
     setIsLoading(false);
@@ -66,29 +74,31 @@ const CvInput = () => {
 
         <UploadDropzone
           appearance={{
-            button({ ready, isUploading, uploadProgress }) {
-              return ` ${
-                ready
-                  ? "text-xl m-4 p-4 bg-white text-black"
-                  : "  w-8 h-8 bg-blue-500 animate-pulse"
-              } 
-                            ${
-                              uploadProgress
-                                ? "rounded-full h-20 w-20 bg-violet-800 animate-ping"
-                                : ""
-                            }  
+            button({ ready, isUploading, uploadProgress })
+            {
+              return ` ${ready
+                ? "text-xl m-4 p-4 bg-white text-black"
+                : "  w-8 h-8 bg-blue-500 animate-pulse"
+                } 
+                            ${uploadProgress
+                  ? "rounded-full h-20 w-20 bg-violet-800 animate-ping"
+                  : ""
+                }  
                             `;
             },
           }}
           className="text-lg h-[250px] mx-auto  bg-secondary-foregroundy rounded-lg "
           endpoint="imageUploader"
-          onClientUploadComplete={(res: any) => {
+          onClientUploadComplete={(res: any) =>
+          {
             setField({ fileName: res[0].name, fileUrl: res[0].url });
           }}
-          onUploadError={(error: Error) => {
+          onUploadError={(error: Error) =>
+          {
             alert(`ERROR! ${error.message}`);
           }}
-          onUploadBegin={(name: any) => {
+          onUploadBegin={(name: any) =>
+          {
             console.log("Uploading: ", name);
           }}
         />

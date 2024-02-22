@@ -1,8 +1,10 @@
 "use client";
 import { auth } from "@/auth";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { PDFIcon } from "@/public/images";
 import { useCVTemplateStore } from "@/store/cv-template-store";
-import {
+import
+{
   AlertCircleIcon,
   DotIcon,
   PictureInPicture2Icon,
@@ -13,7 +15,9 @@ import {
 import Image from "next/image";
 import React from "react";
 
-const CvPreview = () => {
+const CvPreview = ({ data }: any) =>
+{
+  console.log(data)
   const { body, subject, fileName, fileUrl } = useCVTemplateStore();
 
   return (
@@ -39,11 +43,14 @@ const CvPreview = () => {
 
       {/* middle portion */}
       <div className=" flex items-center space-x-4 pl-2">
-        {/* <Avatar textSizeRatio={2} name={user?.username!} size="60" round />
-                <div className="">
-                    <h1> <span className=' font-bold'> {user?.username}</span> {`<${user?.email}>`}</h1>
-                    <h1> to {`${'exmaple@gmail.com'}`}</h1>
-                </div> */}
+        <Avatar className=" border-2 shadow-xl w-14 h-14 cursor-pointer  ">
+          <AvatarImage className=" shadow-sm " src={data?.image} />
+          <AvatarFallback className=" capitalize">{data.email.slice(0, 1)}</AvatarFallback>
+        </Avatar>
+        <div className="">
+          <h1> <span className=' font-bold'> {data?.username}</span> {`<${data?.email}>`}</h1>
+          <h1> to {`${'exmaple@gmail.com'}`}</h1>
+        </div>
       </div>
       {/* body portion */}
       <div className=" w-full h-[40%]  p-6 text-wrap ">

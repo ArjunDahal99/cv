@@ -8,7 +8,7 @@ export interface CVTemplateType
     body: string;
     fileName: string;
     fileUrl: string;
-    email?: string[];
+    email: string[];
     setField: (field: Partial<CVTemplateType>) => void;
     addEmail: (newEmail: string) => void; // Function to add an email
     deleteEmail: (newEmail: string) => void; // Function to add an email

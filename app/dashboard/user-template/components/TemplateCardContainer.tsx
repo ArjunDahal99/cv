@@ -2,12 +2,51 @@
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { Button } from "@/components/ui/button";
 import { formatDate } from "@/lib/dateFormatter";
+import { deleteUserTemplate } from "@/server-action/template/delete-user-template";
+import { useCVTemplateStore } from "@/store/cv-template-store";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { toast } from "sonner";
 
-const TemplateCardContainer = ({ data }: any) => {
-  if (data === null) {
+const TemplateCardContainer = ({ data }: any) =>
+{
+  const { setField } = useCVTemplateStore()
+  const [isMounted, setIsMounted] = useState(false)
+  useEffect(() =>
+  {
+    setIsMounted(true)
+  }, [])
+
+
+  if (!isMounted)
+  {
+    return null
+  }
+  const handelOpen = () =>
+  {
+    setField({
+      body: data.body,
+      subject: data.subject,
+      fileName: data.fileName,
+      fileUrl: data.fileUrl,
+      email: data?.email?.map((e: any) => e.value)
+    })
+  }
+
+  const handelDelete = async () =>
+  {
+
+    console.log(data?.id)
+    const response = await deleteUserTemplate(data?.id)
+    if (response.status)
+    {
+      toast.success(response.message)
+    }
+  }
+
+  if (data === null)
+  {
     return (
       <Link href={"/dashboard/user-template/new"}>
         <CardContainer className=" w-[400px] cursor-pointer  ">
@@ -47,18 +86,18 @@ const TemplateCardContainer = ({ data }: any) => {
             translateZ={20}
             className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
           >
-            {data?.createdAt && formatDate(data.createdAt)}
+            {data?.updatedAt && formatDate(data.updatedAt)}
           </CardItem>
           <CardItem translateZ={20}>
-            <Link href={`create-template/${data._id}`}>
-              <Button variant={"default"} className=" ">
-                Edit
+            <Link href={`/dashboard/user-template/${data.id}`}>
+              <Button onClick={handelOpen} variant={"outline"} className=" ">
+                Open
               </Button>
             </Link>
           </CardItem>
 
           <CardItem translateZ={20}>
-            <Button onClick={() => {}} variant={"destructive"}>
+            <Button onClick={handelDelete} variant={"destructive"}>
               Delete
             </Button>
           </CardItem>

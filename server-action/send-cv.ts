@@ -1,4 +1,6 @@
 "use server"
+import { auth } from "@/auth";
+import prisma from "@/db/db.config";
 import nodemailer from "nodemailer";
 
 export interface Emailoptions
@@ -6,12 +8,14 @@ export interface Emailoptions
     to: string;
     subject: string;
     body: string;
-    filePath?: string;
+    fileUrl?: string;
     fileName?: string;
 }
 
 export const sendCV = async (options: Emailoptions): Promise<void> =>
 {
+    const session = await auth()
+    console.log(session?.user.id)
     console.log(options);
     const transport = nodemailer.createTransport({
         host: 'smtp.gmail.com',
@@ -22,7 +26,7 @@ export const sendCV = async (options: Emailoptions): Promise<void> =>
         },
     });
 
-    const { body, to, filePath, subject, fileName } = options;
+    const { body, to, fileUrl, subject, fileName } = options;
 
     const mailoptions: any = {
         from: "dahalarjun409@gmail.com",
@@ -32,11 +36,11 @@ export const sendCV = async (options: Emailoptions): Promise<void> =>
     };
 
     // Conditionally add attachment if filePath is provided
-    if (filePath && fileName)
+    if (fileUrl && fileName)
     {
         mailoptions.attachments = [{
             filename: fileName,
-            path: filePath
+            path: fileUrl
         }];
     }
 
@@ -55,6 +59,13 @@ export const sendCV = async (options: Emailoptions): Promise<void> =>
     {
         const sendResult = await transport.sendMail(mailoptions as nodemailer.SendMailOptions); // Type assertion here
         console.log(sendResult);
+        const emailSent = await prisma.emailSent.create({
+            data: {
+                email: to,
+                userId: session?.user.id!,
+            }
+        })
+        console.log(emailSent)
     } catch (error)
     {
         console.log(error);
