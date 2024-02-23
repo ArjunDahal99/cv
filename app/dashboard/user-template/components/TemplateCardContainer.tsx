@@ -9,17 +9,21 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-const TemplateCardContainer = ({ data }: any) => {
+const TemplateCardContainer = ({ data }: any) =>
+{
   const { setField } = useCVTemplateStore();
   const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => {
+  useEffect(() =>
+  {
     setIsMounted(true);
   }, []);
 
-  if (!isMounted) {
+  if (!isMounted)
+  {
     return null;
   }
-  const handelOpen = () => {
+  const handelOpen = () =>
+  {
     setField({
       body: data.body,
       subject: data.subject,
@@ -29,15 +33,17 @@ const TemplateCardContainer = ({ data }: any) => {
     });
   };
 
-  const handelDelete = async () => {
-    console.log(data?.id);
+  const handelDelete = async () =>
+  {
     const response = await deleteUserTemplate(data?.id);
-    if (response.status) {
+    if (response.status)
+    {
       toast.success(response.message);
     }
   };
 
-  if (data === null) {
+  if (data === null)
+  {
     return (
       <Link href={"/dashboard/user-template/new"}>
         <CardContainer className=" min-w-[400px] cursor-pointer  ">

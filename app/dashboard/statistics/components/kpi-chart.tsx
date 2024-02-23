@@ -5,8 +5,6 @@ import { AreaChartUsageExampleWithCustomTooltip } from './area-chat';
 const KpiChart = ({ userdata }: any) =>
 {
     const { userEmailSentData, userTemplateData } = userdata;
-
-    console.log(userEmailSentData)
     return (
         <div className=" w-full flex flex-col justify-center">
             <div className="flex flex-wrap h-fit  justify-evenly gap-4 lg:pl-5 max-md:w-full max-md:justify-between max-sm:justify-center max-md:pt-4">

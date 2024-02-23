@@ -1,4 +1,5 @@
-import {
+import
+{
   Card,
   CardContent,
   CardDescription,
@@ -10,9 +11,10 @@ import { UserDataTypes } from "@/types/types";
 import Image from "next/image";
 import { FaGithub, FaGoogle, FaLock } from "react-icons/fa";
 
-const UserProfileBoxContainer = ({ data }: any) => {
+const UserProfileBoxContainer = ({ data }: any) =>
+{
   return (
-    <Card className=" w-[400px]  flex flex-col justify-center items-center max-md:w-full ">
+    <Card className=" w-[400px]  dark:bg-[#111827]  flex flex-col justify-center items-center max-md:w-full ">
       <CardHeader>
         <CardTitle className=" text-center capitalize">
           {data[0].username}

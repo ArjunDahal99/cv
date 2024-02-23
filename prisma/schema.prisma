@@ -44,5 +44,5 @@ model Email {
   id         String   @id @default(cuid()) @map("_id")
   templateId String
   value      String
-  Template   Template @relation(fields: [templateId], references: [id])
+  Template   Template @relation(fields: [templateId], references: [id], onDelete: Cascade)
 }

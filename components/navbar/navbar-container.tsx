@@ -5,6 +5,7 @@ import UserProfileBox from "./user-profile-box";
 import Link from "next/link";
 import Image from "next/image";
 import { LogoDark, LogoWhite } from "@/public/images";
+import MobileSidebar from "../dashboard-nav/mobile-dashbaord-navbar";
 const NavbarContainer = async () =>
 {
   const session = await auth()
@@ -17,6 +18,7 @@ const NavbarContainer = async () =>
       <div className=" flex items-center gap-x-4">
         <UserProfileBox data={session?.user} />
         <ThemeModeToggle />
+        <MobileSidebar />
       </div>
     </nav>
   );

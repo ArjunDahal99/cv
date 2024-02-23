@@ -19,7 +19,6 @@ export const deleteUserTemplate = async (templateId: any) =>
         {
             return { message: "User Not uthorized", status: false }
         }
-        console.log(user)
         const template = await prisma.template.findUnique({
             where: {
                 id: templateId
@@ -30,6 +29,7 @@ export const deleteUserTemplate = async (templateId: any) =>
         {
             return { message: "Template Not Found ", status: false };
         }
+
 
         const deleteTemplate = await prisma.template.delete({
             where: {

@@ -16,14 +16,8 @@ const Statistics = async () =>
         created_At,
         credentialProvider,
     }));
-
-
-
     const userTemplateData = allUserData?.data?.map(({ templates }) => templates).flat()
-
     const userEmailSentData = allUserData?.data?.map(({ emailSent }) => emailSent).flat();
-    console.log(userEmailSentData)
-    console.log(userTemplateData)
 
     return (
         <>
