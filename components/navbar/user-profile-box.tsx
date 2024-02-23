@@ -13,7 +13,6 @@ import { auth, signOut } from "@/auth"
 import SignOutButton from "./signout-button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-
 const UserProfileBox = ({ data }: any) =>
 {
     return (
@@ -21,7 +20,7 @@ const UserProfileBox = ({ data }: any) =>
             <DropdownMenuTrigger asChild>
                 {data ? <Avatar className=" border-2 shadow-xl cursor-pointer  ">
                     <AvatarImage className=" shadow-sm " src={data?.image} />
-                    <AvatarFallback className=" capitalize">{data.email.slice(0, 1)}</AvatarFallback>
+                    <AvatarFallback className=" capitalize">{data?.email?.slice(0, 1)}</AvatarFallback>
                 </Avatar> :
                     !data && <Link href={'/api/auth/signin'}>Login</Link>}
 

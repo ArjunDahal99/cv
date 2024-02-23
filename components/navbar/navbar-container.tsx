@@ -9,7 +9,7 @@ const NavbarContainer = async () =>
 {
   const session = await auth()
   return (
-    <nav className=" fixed w-full h-20  flex  bg-background/60 items-center justify-between px-6 max-md:px-3 py-10 ">
+    <nav className=" fixed w-full h-20 z-[999]  flex  bg-background/90 items-center justify-between px-6 max-md:px-3 py-10 ">
       <Link href={'/'}>
         <Image src={LogoWhite} alt="Light Mode Image" className=" w-[150px]  object-cover dark:hidden" />
         <Image src={LogoDark} alt="Light Mode Image" className=" w-[150px]   object-cover hidden dark:block" />

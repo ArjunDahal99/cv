@@ -48,7 +48,7 @@ export const registerUser: (values: RegisterFormValues) => Promise<RegisterRespo
         email,
         username,
         password: hashPassword,
-        credentialProvider: "Credentail"
+        credentialProvider: "credentials"
       }
     });
 

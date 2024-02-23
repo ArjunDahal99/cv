@@ -1,30 +1,39 @@
-import { auth } from "@/auth"
+import { auth } from "@/auth";
 import prisma from "@/db/db.config";
+import { UserDataTypes } from "@/types/types";
 
-export const getAllUserData = async()=>{
-try {
-       
-    const session = await auth();
-
-    if (!session)
+export const getAllUserData = async (): Promise<{ message: string; success: boolean; data?: UserDataTypes[] }> =>
+{
+    try
     {
-        return { message: "User Not Authorized", status: false };
-    }
-    const user = await prisma.user.findUnique({ where: { id: session.user.id },include:{
-        templates:{
-            include:{
-                email:true
-            }
-        },
-        emailSent:true,
-    } });
+        const session = await auth();
 
-    if(!user)
+        if (!session)
+        {
+            return { message: "User Not Authorized", success: false };
+        }
+
+        const user = await prisma.user.findUnique({
+            where: { id: session.user.id },
+            include: {
+                templates: {
+                    include: {
+                        email: true,
+                    },
+                },
+                emailSent: true,
+            },
+        });
+
+        if (!user)
+        {
+            return { message: "User Not Found", success: false };
+        }
+
+        return { message: "User Fetched", success: true, data: [user] };
+    } catch (error)
     {
-        return { message:"User Not Found" ,success:false}
+        console.error("Error in getAllUserData:", error);
+        return { message: "Something Went Wrong", success: false };
     }
-    return { message:"User Featched" , success:true , data:user}
-} catch (error) {
-    return { message:"Some thing Went Wrong" , success:false }
-}
-}   
+};
