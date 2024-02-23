@@ -9,48 +9,39 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-const TemplateCardContainer = ({ data }: any) =>
-{
-  const { setField } = useCVTemplateStore()
-  const [isMounted, setIsMounted] = useState(false)
-  useEffect(() =>
-  {
-    setIsMounted(true)
-  }, [])
+const TemplateCardContainer = ({ data }: any) => {
+  const { setField } = useCVTemplateStore();
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-
-  if (!isMounted)
-  {
-    return null
+  if (!isMounted) {
+    return null;
   }
-  const handelOpen = () =>
-  {
+  const handelOpen = () => {
     setField({
       body: data.body,
       subject: data.subject,
       fileName: data.fileName,
       fileUrl: data.fileUrl,
-      email: data?.email?.map((e: any) => e.value)
-    })
-  }
+      email: data?.email?.map((e: any) => e.value),
+    });
+  };
 
-  const handelDelete = async () =>
-  {
-
-    console.log(data?.id)
-    const response = await deleteUserTemplate(data?.id)
-    if (response.status)
-    {
-      toast.success(response.message)
+  const handelDelete = async () => {
+    console.log(data?.id);
+    const response = await deleteUserTemplate(data?.id);
+    if (response.status) {
+      toast.success(response.message);
     }
-  }
+  };
 
-  if (data === null)
-  {
+  if (data === null) {
     return (
       <Link href={"/dashboard/user-template/new"}>
-        <CardContainer className=" w-[400px] cursor-pointer  ">
-          <CardBody className="bg-gray-50 relative group/card hover:shadow-2xl flex justify-center shadow-sm h-[250px]  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] rounded-xl p-4 border  ">
+        <CardContainer className=" min-w-[400px] cursor-pointer  ">
+          <CardBody className="  w-[400px] bg-gray-50 relative group/card hover:shadow-2xl flex justify-center shadow-sm h-[250px]  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] rounded-xl p-4 border  ">
             <CardItem
               translateZ="50"
               className="text-xl  flex justify-center items-center
