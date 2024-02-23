@@ -6,14 +6,14 @@ const UserTemplate = async () =>
 {
   const { data } = await getUserTemplate();
   return (
-    <div className=" flex w-full ">
-      <div className="flex flex-wrap gap-y-10 px-18 gap-x-11  p-8  max-md:justify-end justify-start">
-        <TemplateCardContainer data={null} />
-        {data?.map((template: any) => (
-          <TemplateCardContainer key={template.id} data={template} />
-        ))}
-      </div>
+
+    <div className=" lg:pl-28  grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 max-md:p-4 gap-y-[20px]  ">
+      <TemplateCardContainer data={null} />
+      {data?.map((template: any) => (
+        <TemplateCardContainer key={template.id} data={template} />
+      ))}
     </div>
+
   );
 };
 

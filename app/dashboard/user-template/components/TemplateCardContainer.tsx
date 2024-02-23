@@ -45,9 +45,9 @@ const TemplateCardContainer = ({ data }: any) =>
   if (data === null)
   {
     return (
-      <Link href={"/dashboard/user-template/new"}>
-        <CardContainer className=" min-w-[400px] cursor-pointer  ">
-          <CardBody className="  w-[400px] bg-gray-50 relative group/card hover:shadow-2xl flex justify-center shadow-sm h-[250px]  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] rounded-xl p-4 border  ">
+      <Link className="w-fit max-md:w-full" href={"/dashboard/user-template/new"}>
+        <CardContainer className=" cursor-pointer w-fit max-md:w-full ">
+          <CardBody className=" w-[400px] max-md:w-full  bg-gray-50 relative group/card hover:shadow-2xl flex justify-center shadow-sm h-[220px]  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] rounded-xl p-4 border  ">
             <CardItem
               translateZ="50"
               className="text-xl  flex justify-center items-center
@@ -62,8 +62,8 @@ const TemplateCardContainer = ({ data }: any) =>
     );
   }
   return (
-    <CardContainer className=" w-[400px]   ">
-      <CardBody className="bg-gray-50 relative group/card hover:shadow-2xl shadow-sm h-[250px]  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] rounded-xl p-4 border  ">
+    <CardContainer className=" w-fit max-md:w-full ">
+      <CardBody className=" w-[400px] max-md:w-full   bg-gray-50 relative group/card hover:shadow-2xl shadow-sm h-[220px]  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1]    rounded-xl p-4 border  ">
         <CardItem
           translateZ="50"
           className="text-xl font-bold text-neutral-600 dark:text-white"

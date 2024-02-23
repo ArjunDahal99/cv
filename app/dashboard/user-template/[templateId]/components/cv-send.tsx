@@ -8,6 +8,7 @@ import { XIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { sendCV } from '@/server-action/send-cv';
 import { deleteUserTemplateEmail } from '@/server-action/template/delete-user-template';
+import LoadingSpinner from '@/components/ui/loading';
 
 const CvSendContainer = ({ templateId }: { templateId: string }) =>
 {
@@ -47,7 +48,6 @@ const CvSendContainer = ({ templateId }: { templateId: string }) =>
         try
         {
             setIsLoading(true);
-            alert(isLoading);
             await Promise.all(email.map(async (e) =>
             {
                 await sendCV({ body, subject, to: e, fileUrl, fileName });
@@ -68,13 +68,13 @@ const CvSendContainer = ({ templateId }: { templateId: string }) =>
                 <Input onChange={(e) => { setInputEmail(e.target.value) }} value={inputEmail} type='text' required />
                 <Button type='submit' variant={'secondary'} className='px-10'>Add</Button>
             </form>
-            <div className="flex flex-wrap  justify-center gap-x-16  gap-y-6 items-center py-5 w-full  ">
+            <div className="flex flex-wrap  justify-start max-md:pl-20 gap-x-16  gap-y-6 items-center py-5 w-full  ">
                 {email && email.map((e, i) => (
-                    <div key={i} className="flex p-2  dark:bg-secondary bg-orange-400/50 h-[30px] w-[250px] rounded-full items-center   justify-between">
+                    <div key={i} className="flex   p-2  dark:bg-secondary bg-orange-400/50 h-[30px] w-[250px] rounded-full items-center   justify-between">
                         <h1>{e}</h1>
                         {isLoading
                             ?
-                            <h1>...</h1>
+                            <LoadingSpinner />
                             :
                             <XIcon onClick={() => handleDeleteEmail(e)} className='  hover:text-red-500 cursor-pointer rounded-full ' size={16} />
                         }

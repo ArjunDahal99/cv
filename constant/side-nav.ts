@@ -30,9 +30,4 @@ export const sideNavContent: SideNavContentType[] = [
         link: "/dashboard/settings",
         logo: SettingsIcon
     },
-    {
-        name: "Settings",
-        link: "/dashboard/settings",
-        logo: SettingsIcon
-    }
 ];

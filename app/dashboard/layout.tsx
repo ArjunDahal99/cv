@@ -6,7 +6,7 @@ const DashBoardLayout = ({ children }: { children: React.ReactNode }) =>
     <>
       <section className=" flex w-full min-h-screen">
         <DashBoardSideNavBar inMobileView={false} />
-        <div className=" mt-20 md:ml-[250px] w-full   min-h-screen  ">
+        <div className=" mt-20 max-md:mt-28 lg:ml-[250px] w-full  min-h-screen  ">
           {children}
         </div>
       </section>
