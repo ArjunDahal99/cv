@@ -12,7 +12,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import SocialMediaContiner from "./social-media";
 import Image from "next/image";
-import { LogoDark, LogoWhite } from "@/public/images";
+import { Logo, LogoDark, LogoWhite } from "@/public/images";
 
 interface CardContainerPropsType
 {
@@ -36,7 +36,7 @@ const CardContainer = ({
   return (
     <Card className=" w-[500px] max-md:w-full max-md:mx-2">
       <CardHeader>
-        <CardTitle className=" text-center">{title}</CardTitle>
+        <CardTitle className="  flex items-center justify-center space-x-2"> <p>{title} </p><Image src={Logo} className="w-8 h-8" alt="logo" /></CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>{content}</CardContent>
