@@ -29,7 +29,7 @@ const TypewriterEffect = () =>
             </div>
             <div className=" flex  items-center  text-[3rem]   max-sm:text-[2rem]   gap-x-4">
                 <p className=''>Your</p>
-                <p className='   font-[900]  bg-gradient-to-r  translate-y-[-6px] max-sm:text-[3rem]  text-[4rem] from-purple-700  via-pink-600 to-blue-600  text-transparent bg-clip-text animate-gradient'> CV</p>
+                <p className='   font-[600]  bg-gradient-to-r  translate-y-[-6px] max-sm:text-[3rem]  text-[4rem] from-purple-700  via-pink-600 to-blue-600  text-transparent bg-clip-text animate-gradient'> CV</p>
             </div>
 
 
