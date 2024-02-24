@@ -15,7 +15,7 @@ const LottieAnimation = () =>
         return null
     }
     return (
-        <div className=" w-[20vw] max-md:w-full">
+        <div className=" w-[20vw] max-md:w-full h-[500px]">
             <Lottie animationData={animationData} />
         </div>
     )

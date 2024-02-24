@@ -6,6 +6,76 @@
   display: none;
 }
 
+.button-one {
+  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+}
+
+.button-outline {
+  animation: Gradient 10s ease infinite;
+  position: relative;
+  &::after {
+    content:'';
+    position: absolute;
+    border-radius: 28px;
+    z-index: 0;
+    top: 2px;
+    bottom: 2px;
+    right: 2px;
+    left: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+  }
+}
+
+.btn {
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border-radius: 50px;
+  background-size: 400% 400%;
+  color: #FFF;
+  border: 0;
+  animation: Gradient 10s ease infinite;
+  &:hover {
+    background-size: 150% 150%;
+  }
+}
+
+
+
+.animate-gradient {
+  background-size: 300%;
+  -webkit-animation: animatedgradient 6s ease infinite alternate;
+  -moz-animation: animatedgradient 6s ease infinite alternate;
+  animation: animatedgradient 6s ease infinite alternate;
+}
+
+@keyframes animatedgradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+
 .textarea-container {
   border: none;
   outline: none;

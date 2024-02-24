@@ -51,7 +51,7 @@ export default function MobileSidebar()
                             leaveFrom="translate-x-0"
                             leaveTo="-translate-x-full"
                         >
-                            <Dialog.Panel className="w-fit mt-[20vh] relative z-[9999] max-w-md transform overflow-hidden rounded-2xl shadow-xl transition-all">
+                            <Dialog.Panel className="w-fit mt-[20vh]   h-dvh relative z-[9999] max-w-md transform overflow-hidden rounded-2xl shadow-xl transition-all">
                                 <DashBoardSideNavBar inMobileView={true} />
                             </Dialog.Panel>
                         </Transition.Child>

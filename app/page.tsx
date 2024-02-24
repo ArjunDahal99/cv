@@ -1,34 +1,17 @@
 
+import GetStarted from "@/components/homepage/get-started";
 import LottieAnimation from "@/components/homepage/lottie-animation";
-import { TypewriterEffectSmooth } from "@/components/homepage/typewriter-effect";
+import AnimatedCharacters from "@/components/homepage/typewriter-effect";
+import TypewriterEffect from "@/components/homepage/typewriter-effect";
+
 
 const HomePage = async () =>
 {
-  const words = [
-    {
-      text: "Send",
-    },
-    {
-      text: "Your",
-    },
-    {
-      text: "Cv",
-    },
-    {
-      text: "10x",
-    },
-    {
-      text: "Faster",
-    },
-    {
-      text: "with Sencv.",
-      className: "text-blue-500 dark:text-blue-500",
-    },
-  ];
 
   return (
-    <main className=" flex flex-col justify-center h-[89vh] items-center">
-      {/* <TypewriterEffectSmooth words={words} /> */}
+    <main className=" flex flex-col pt-[14vh] max-md:pt-[24vh] justify-center h-screen  items-center">
+      <AnimatedCharacters />
+      <GetStarted />
       <LottieAnimation />
     </main>
   )

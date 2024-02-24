@@ -9,8 +9,8 @@ const DashBoardSideNavBar = ({ inMobileView }: { inMobileView: boolean }) =>
 
   return (
     <nav className={`${inMobileView
-      ? " w-fit h-screen border-r-2  bg-background  "
-      : "  w-fit h-screen border-r-2 top-20   max-md:hidden fixed "
+      ? " w-fit   h-dvh border-r-2  bg-background  "
+      : "  w-fit   h-dvh border-r-2 top-20   max-md:hidden fixed "
       }`} >
       <div className={`pl-4 z-[999999]  flex flex-col pt-2 justify-start gap-y-10 min-w-[250px] min-h-screen`}>
         {sideNavContent.map((nav) =>
