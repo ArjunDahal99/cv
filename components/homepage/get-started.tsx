@@ -1,8 +1,12 @@
 import React from 'react'
 import { Button } from '../ui/button'
+import { auth } from '@/auth'
+import Link from 'next/link'
 
-const GetStarted = () =>
+const GetStarted = async () =>
 {
+    const session = await auth()
+    console.log(session?.user)
     return (
         <>
             <div className=" text-center  pt-[2rem] ">
@@ -12,9 +16,11 @@ const GetStarted = () =>
                     Seamless Organization, and Amplified Connectivity !
                 </h1>
                 <div className=" flex justify-center pt-[2rem] drop-shadow-md">
-                    <button className="btn bg-secondary p-2  button-outline button-one">
-                        <span className=' font-bold  px-4 '>Get Started</span>
-                    </button>
+                    <Link href={session?.user ? '/dashboard/statistics' : '/api/auth/signup'}>
+                        <button className="btn bg-secondary p-2  button-outline button-one">
+                            <span className=' font-bold  px-4 '>Get Started</span>
+                        </button>
+                    </Link>
 
                 </div>
             </div>

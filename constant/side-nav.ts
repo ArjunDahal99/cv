@@ -20,14 +20,14 @@ export const sideNavContent: SideNavContentType[] = [
         link: "/dashboard/user-template",
         logo: LayoutPanelTopIcon
     },
-    {
-        name: "Configure",
-        link: "/dashboard/configure",
-        logo: BoltIcon
-    },
-    {
-        name: "Settings",
-        link: "/dashboard/settings",
-        logo: SettingsIcon
-    },
+    // {
+    //     name: "Configure",
+    //     link: "/dashboard/configure",
+    //     logo: BoltIcon
+    // },
+    // {
+    //     name: "Settings",
+    //     link: "/dashboard/settings",
+    //     logo: SettingsIcon
+    // },
 ];
